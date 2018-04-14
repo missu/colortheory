@@ -1,0 +1,42 @@
+{
+  "name": "colortheory",
+  "version": "0.9.0",
+  "description": "Manipulating color in JS",
+  "main": "color-theory.js",
+  "scripts": {
+    "test": "mocha --require babel-polyfill --require babel-register",
+    "build": "babel src -d lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/missu/colortheory.git"
+  },
+  "keywords": [
+    "Color Theory",
+    "theory",
+    "color",
+    "colour",
+    "shades",
+    "tints",
+    "tones",
+    "rgb",
+    "hsl",
+    "palette",
+    "color conversions",
+    "Color Vision",
+    "Vision"
+  ],
+  "author": "missu",
+  "bugs": {
+    "url": "https://github.com/missu/colortheory/issues"
+  },
+  "homepage": "https://github.com/missu/colortheory#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
+    "chai": "^4.1.2",
+    "mocha": "^5.1.0"
+  }
+}
