@@ -1,5 +1,7 @@
 'use strict';
 
+import {default as colorKeywords} from './util/color-keywords.js';
+
 class ColorTheory {
     constructor() {
     }
@@ -22,7 +24,7 @@ class ColorTheory {
 
         function hex_it(h) {
             let num = h.length > 2 && h[0] === '0' ? parseInt(h.slice(1,3), 10).toString(16).toUpperCase() :
-parseInt(h, 10).toString(16).toUpperCase();
+            parseInt(h, 10).toString(16).toUpperCase();
 
             if (num.length < 2) {
                 num = "0" + num;
@@ -32,20 +34,32 @@ parseInt(h, 10).toString(16).toUpperCase();
             }
 
             return num;
-        };
+        }
 
         return `#${hex_color}`;
     }
 
     rgbaToHex(rgbaColor) {
-
+        // TODO: should I pay attention to the opacity (a)?
+        return this.rgbToHex(rgbaColor);
     }
 
     nameToHex(name) {
+        if (colorKeywords[name]) {
+            return (colorKeywords[name][0]).toUpperCase();
+        }
+        else {
+            return undefined;
+        }
     }
 
-    nameToRgb(name){
-
+    nameToRgb(name) {
+        if (colorKeywords[name]) {
+            return colorKeywords[name][1];
+        }
+        else {
+            return undefined;
+        }
     }
 
     // Ranges of Color
