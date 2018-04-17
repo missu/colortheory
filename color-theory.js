@@ -181,7 +181,7 @@ class ColorTheory {
         else if (color[0] === '#') {
             let hex = this.splitChannels(color);
             hex = hex.map((element) => {
-                return  Math.abs(parseInt(element, 16) - 255);
+                return  (Math.abs(parseInt(element, 16) - 255)).toString(16);
             });
 
             return `#${hex[0]}${hex[1]}${hex[2]}`;

@@ -100,9 +100,11 @@ describe('Color Converters', function() {
 
         it('should return the complimentary color', function() {
             let result1 = ct.compliment('113,52,78');
+            let result2 = ct.compliment('#DDDDDD');
 
             expect(result1).to.be.a('string');
             expect(result1).to.equal('142,203,177');
+            expect(result2).to.equal('#222222');
         });
     });
 
