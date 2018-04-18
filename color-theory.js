@@ -119,6 +119,9 @@ class ColorTheory {
         let returnFormatHex = (/\,/g).test(color1) ? false : true;
         let temp1 = processColorChannel(color1, this);
         let temp2 = processColorChannel(color2, this);
+        let red = 0;
+        let green = 0;
+        let blue = 0;
 
         function checkRange(num) {
             return num > 255 ? 255 : num;
@@ -141,9 +144,6 @@ class ColorTheory {
             return null;
         }
 
-        let red = 0;
-        let green = 0;
-        let blue = 0;
 
         if (returnFormatHex) {
             red = temp1[0] + temp2[0];

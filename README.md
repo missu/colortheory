@@ -1,2 +1,2 @@
 # colortheory
-Manipulating color in jS
+Manipulating color in JS
