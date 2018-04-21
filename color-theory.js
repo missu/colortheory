@@ -155,7 +155,6 @@ class ColorTheory {
             });
             return `#${lighterColor[0]}${lighterColor[1]}${lighterColor[2]}`;
         }
-
     }
 
     darken(color, percentage) {
@@ -201,12 +200,6 @@ class ColorTheory {
 
     // Mix and Matching
     mix(color1, color2) {
-        // test whether color is hex or rgb
-        // convert to rgb for addition
-        // split the channel and add separatly
-        // if both colors are rbg, return rgb
-        // other wise return as a hex
-
         let self = this;
         let returnFormatHex = (/\,/g).test(color1) ? false : true;
         let temp1 = processColorChannel(color1, this);
@@ -292,9 +285,6 @@ class ColorTheory {
             return [temp[1], temp[2], temp[3]];
         }
     }
-
-
-
 }
 
 const colorTheory = new ColorTheory();
