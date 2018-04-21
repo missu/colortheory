@@ -68,13 +68,57 @@ class ColorTheory {
 
     // Ranges of Color
     shades(color) {
-        // adding black
-        // return an array
+        let isRgb = null;
+
+        if((/\,/g).test(color)) {
+            isRgb = true;
+        }
+        else if (color[0] === '#') {
+            isRgb = false;
+            color = this.hexToRgb(color);
+        }
+        else { return null;}
+
+        let shades = [];
+
+        for (let i = 0, percentage = 0; i <= 10; i++, percentage+=10) {
+            shades.push(this.darken(color, percentage));
+        }
+        if (isRgb) {
+            return shades;
+        }
+        else {
+            return shades.map((element)=>{
+                return `#${parseInt(element, 10).toString(16).toUpperCase()}`;
+            });
+        }
     }
 
     tints(color) {
-        // adding white
-        // return an array
+        let isRgb = null;
+
+        if((/\,/g).test(color)) {
+            isRgb = true;
+        }
+        else if (color[0] === '#') {
+            isRgb = false;
+            color = this.hexToRgb(color);
+        }
+        else { return null;}
+
+        let tints = [];
+
+        for (let i = 0, percentage = 0; i <= 10; i++, percentage+=10) {
+            tints.push(this.lighten(color, percentage));
+        }
+        if (isRgb) {
+            return tints;
+        }
+        else {
+            return tints.map((element)=>{
+                return `#${parseInt(element, 10).toString(16).toUpperCase()}`;
+            });
+        }
     }
 
     tones(color) {
@@ -83,19 +127,67 @@ class ColorTheory {
     }
 
     lighten(color, percentage) {
-        // adding white
-        // test whether color is hex or rgb
-        // convert to rgb for addition
-        // split the channel and add separatly
-        let delta = Math.round(255*percentage);
+        let isRgb = null;
+
+        if((/\,/g).test(color)) {
+            isRgb = true;
+        }
+        else if (color[0] === '#') {
+            isRgb = false;
+            color = this.hexToRgb(color);
+        }
+        else { return null;}
+        percentage = percentage !== undefined ? percentage : 50;
+        let channels = this.splitChannels(color);
+        let max = Math.max(...channels)
+        let increment = Math.round((255-max)*(percentage/100));
+
+        let lighterColor = channels.map((element) => {
+            return element >= 255 ? element : parseInt(element, 10) + increment;
+        });
+
+        if (isRgb) {
+            return `${lighterColor[0]},${lighterColor[1]},${lighterColor[2]}`;
+        }
+        else {
+            lighterColor = lighterColor.map((element) => {
+                return parseInt(element, 10).toString(16).toUpperCase();
+            });
+            return `#${lighterColor[0]}${lighterColor[1]}${lighterColor[2]}`;
+        }
+
     }
 
     darken(color, percentage) {
-        // adding black
-        // test whether color is hex or rgb
-        // convert to rgb for addition
-        // split the channel and add separatly
-        let delta = Math.round(255*percentage);
+        let isRgb = null;
+
+        if((/\,/g).test(color)) {
+            isRgb = true;
+        }
+        else if (color[0] === '#') {
+            isRgb = false;
+            color = this.hexToRgb(color);
+        }
+        else { return null;}
+        percentage = percentage !== undefined ? percentage : 50;
+        let channels = this.splitChannels(color);
+        let min = Math.min(...channels)
+        //let decriment = Math.round((255-min)*(percentage/100));
+        let decriment = Math.round(min*(percentage/100));
+
+        let darkerColor = channels.map((element) => {
+            return element <= 0 ? 0 : parseInt(element, 10) - decriment;
+        });
+
+        if (isRgb) {
+            return `${darkerColor[0]},${darkerColor[1]},${darkerColor[2]}`;
+        }
+        else {
+            darkerColor = darkerColor.map((element) => {
+                return parseInt(element, 10).toString(16).toUpperCase();
+            });
+            return `#${darkerColor[0]}${darkerColor[1]}${darkerColor[2]}`;
+        }
     }
 
     mute(color, percentage) {
