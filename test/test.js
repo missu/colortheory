@@ -142,10 +142,9 @@ describe('Lighten Methods' , function() {
 
         expect(result1).to.be.a('string');
         expect(result1).to.equal('184,123,149');
-
     });
 
-     it('should return an array of tints for specified color', function() {
+    it('should return an array of tints for specified color', function() {
         let result1 = ct.tints('113, 52, 78');
 
         expect(result1).to.be.an('Array');
