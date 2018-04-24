@@ -122,8 +122,30 @@ class ColorTheory {
     }
 
     tones(color) {
-        // adding gray
-        // return an array
+        let isRgb = null;
+
+        if((/\,/g).test(color)) {
+            isRgb = true;
+        }
+        else if (color[0] === '#') {
+            isRgb = false;
+            color = this.hexToRgb(color);
+        }
+        else { return null;}
+
+        let tones = [];
+
+        for (let i = 0, percentage = 0; i <= 10; i++, percentage+=10) {
+            tones.push(this.desaturate(color, percentage));
+        }
+        if (isRgb) {
+            return tones;
+        }
+        else {
+            return tones.map((element)=>{
+                return `#${parseInt(element, 10).toString(16).toUpperCase()}`;
+            });
+        }
     }
 
     lighten(color, percentage) {
@@ -141,7 +163,6 @@ class ColorTheory {
         let channels = this.splitChannels(color);
         let max = Math.max(...channels)
         let increment = Math.round((255-max)*(percentage/100));
-
         let lighterColor = channels.map((element) => {
             return element >= 255 ? element : parseInt(element, 10) + increment;
         });
@@ -171,7 +192,6 @@ class ColorTheory {
         percentage = percentage !== undefined ? percentage : 50;
         let channels = this.splitChannels(color);
         let min = Math.min(...channels)
-        //let decriment = Math.round((255-min)*(percentage/100));
         let decriment = Math.round(min*(percentage/100));
 
         let darkerColor = channels.map((element) => {
@@ -189,13 +209,46 @@ class ColorTheory {
         }
     }
 
-    mute(color, percentage) {
+    desaturate(color, percentage) {
         // adding gray
-        // test whether color is hex or rgb
-        // convert to rgb for addition
-        // split the channel and add separatly
-        let delta = Math.round(128*percentage);
+        let isRgb = null;
 
+        if((/\,/g).test(color)) {
+            isRgb = true;
+        }
+        else if (color[0] === '#') {
+            isRgb = false;
+            color = this.hexToRgb(color);
+        }
+        else { return null;}
+        percentage = percentage !== undefined ? percentage : 50;
+        let channels = this.splitChannels(color);
+        let sorted = [...channels];
+        sorted.sort((a,b)=>{ return a-b});
+        let medium = sorted[1];
+        let delta = Math.round(medium*(percentage/100));
+        let mutedColor = channels.map((element) => {
+            if (element === medium) {
+                return medium;
+            }
+            else if (element > medium) {
+                delta = Math.round((parseInt(element, 10) - parseInt(medium, 10)) * (percentage/100));
+                return parseInt(element, 10) - delta;
+            }
+            else {
+                delta = Math.round((parseInt(medium, 10) - parseInt(element, 10)) * (percentage/100));
+                return parseInt(element, 10) + delta;
+            }
+        });
+        if (isRgb) {
+            return `${mutedColor[0]},${mutedColor[1]},${mutedColor[2]}`;
+        }
+        else {
+            mutedColor = mutedColor.map((element) => {
+                return parseInt(element, 10).toString(16).toUpperCase();
+            });
+            return `#${mutedColor[0]}${mutedColor[1]}${mutedColor[2]}`;
+        }
     }
 
     // Mix and Matching

@@ -184,7 +184,34 @@ describe('Darken Methods' , function() {
 
 });
 
-describe('Mute or Desaturate Methods' , function() {});
+describe('Mute or Desaturate Methods' , function() {
+    it('should desaturate the color based on percentage provided', function() {
+        let result1 = ct.desaturate('113, 52, 78', 40);
+        let result2 = ct.desaturate('0, 1, 0', 20);
+        let result3 = ct.desaturate('#FFCCA3', 30);
+
+        expect(result1).to.be.a('string');
+        expect(result1).to.equal('99,62,78');
+        expect(result2).to.equal('0,1,0');
+        expect(result3).to.equal('#F0CCAF');
+    });
+
+    it('should desaturate the color by 50% if no percentage was provided', function() {
+        let result1 = ct.desaturate('#A8D8AD');
+
+        expect(result1).to.be.a('string');
+        expect(result1).to.equal('#ABC2AD');
+    });
+
+    it('should return an array of tones for specified color', function() {
+        let result1 = ct.tones('133, 212, 208');
+
+        expect(result1).to.be.an('Array');
+        expect(result1).to.deep.equal(['133,212,208', '141,212,208', '148,211,208', '156,211,208','163,210,208','171,210,208','178,210,208','186,209,208','193,209,208','201,208,208','208,208,208']);
+
+    });
+
+});
 
 
 
