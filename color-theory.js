@@ -88,7 +88,7 @@ class ColorTheory {
         }
         else {
             return shades.map((element)=>{
-                return `#${parseInt(element, 10).toString(16).toUpperCase()}`;
+                return `${this.rgbToHex(element)}`;
             });
         }
     }
@@ -115,7 +115,7 @@ class ColorTheory {
         }
         else {
             return tints.map((element)=>{
-                return `#${parseInt(element, 10).toString(16).toUpperCase()}`;
+                return `${this.rgbToHex(element)}`;
             });
         }
     }
@@ -142,7 +142,7 @@ class ColorTheory {
         }
         else {
             return tones.map((element)=>{
-                return `#${parseInt(element, 10).toString(16).toUpperCase()}`;
+                return `${this.rgbToHex(element)}`;
             });
         }
     }

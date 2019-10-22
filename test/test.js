@@ -146,9 +146,11 @@ describe('Lighten Methods' , function() {
 
     it('should return an array of tints for specified color', function() {
         let result1 = ct.tints('113, 52, 78');
+        let result2 = ct.tints('#71344E');
 
         expect(result1).to.be.an('Array');
         expect(result1).to.deep.equal(['113,52,78', '127,66,92', '141,80,106', '156,95,121','170,109,135','184,123,149','198,137,163','212,151,177','227,166,192','241,180,206','255,194,220']);
+        expect(result2).to.deep.equal(['#71344E', '#7F425C', '#8D506A', '#9C5F79', '#AA6D87', '#B87B95', '#C689A3', '#D497B1', '#E3A6C0', '#F1B4CE', '#FFC2DC' ]);
 
     });
 
@@ -175,9 +177,11 @@ describe('Darken Methods' , function() {
 
     it('should return an array of shades for specified color', function() {
         let result1 = ct.shades('113, 52, 78');
+        let result2 = ct.shades('#71344E');
 
         expect(result1).to.be.an('Array');
         expect(result1).to.deep.equal(['113,52,78', '108,47,73', '103,42,68', '97,36,62','92,31,57','87,26,52','82,21,47','77,16,42','71,10,36','66,5,31','61,0,26']);
+        expect(result2).to.deep.equal(['#71344E', '#6C2F49', '#672A44', '#61243E', '#5C1F39', '#571A34', '#52152F', '#4D102A', '#470A24', '#42051F', '#3D001A']);
 
     });
 
@@ -204,9 +208,11 @@ describe('Mute or Desaturate Methods' , function() {
 
     it('should return an array of tones for specified color', function() {
         let result1 = ct.tones('133, 212, 208');
+        let result2 = ct.tones('#85D4D0');
 
         expect(result1).to.be.an('Array');
         expect(result1).to.deep.equal(['133,212,208', '141,212,208', '148,211,208', '156,211,208','163,210,208','171,210,208','178,210,208','186,209,208','193,209,208','201,208,208','208,208,208']);
+        expect(result2).to.deep.equal(['#85D4D0', '#8DD4D0', '#94D3D0', '#9CD3D0', '#A3D2D0', '#ABD2D0', '#B2D2D0', '#BAD1D0', '#C1D1D0', '#C9D0D0', '#D0D0D0']);
 
     });
 
