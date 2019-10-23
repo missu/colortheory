@@ -113,10 +113,16 @@ describe('Mix and Matching' , function() {
     it('should return the complimentary color', function() {
         let result1 = ct.compliment('113,52,78');
         let result2 = ct.compliment('#DDDDDD');
+        let result3 = ct.compliment('#FF0000');
+        let result4 = ct.compliment('#00FF00');
+        let result5 = ct.compliment('#0000FF');
 
         expect(result1).to.be.a('string');
         expect(result1).to.equal('142,203,177');
         expect(result2).to.equal('#222222');
+        expect(result3).to.equal('#00ffff');
+        expect(result4).to.equal('#ff00ff');
+        expect(result5).to.equal('#ffff00');
     });
 });
 
