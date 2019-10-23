@@ -29,13 +29,12 @@ describe('Color Converters', function() {
             let result4 = ct.nameToHex('lemonchiffon');
             let result5 = ct.nameToHex('wawawawa');
 
-
             expect(result1).to.be.a('string');
             expect(result1).to.equal('#FF1493');
             expect(result2).to.equal('#483D8B');
             expect(result3).to.equal('#1E90FF');
             expect(result4).to.equal('#FFFACD');
-            expect(result5).to.equal(undefined);
+            expect(result5).to.equal(null);
         });
     });
 
@@ -61,13 +60,25 @@ describe('Color Converters', function() {
             let result4 = ct.nameToRgb('mediumturquoise');
             let result5 = ct.nameToRgb('wawawawa');
 
-
             expect(result1).to.be.a('string');
             expect(result1).to.equal('75,0,130');
             expect(result2).to.equal('230,230,250');
             expect(result3).to.equal('255,240,245');
             expect(result4).to.equal('72,209,204');
-            expect(result5).to.equal(undefined);
+            expect(result5).to.equal(null);
+        });
+        
+    });
+
+    describe('Convert to Color Keywords', function() {
+        it('should return a color keyword if hex color is found', function() {
+            let result1 = ct.hexToName("#FFE4C4");
+            expect(result1).to.equal("bisque");
+        });
+    
+        it('should return a color keyword if rgb color is found', function() {
+            let result1 = ct.rgbToName("105,105,105");
+            expect(result1).to.equal("dimgray");
         });
     });
 });
